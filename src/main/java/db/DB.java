@@ -22,6 +22,15 @@ public class DB {
         }
         return conn;
     }
+    public static void closeConnection() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DbException(e.getMessage());
+            }
+        }
+    }
 
     private static Properties loadProperties() {
         try (FileInputStream fs = new FileInputStream("config.properties")) {
